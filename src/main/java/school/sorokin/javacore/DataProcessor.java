@@ -11,12 +11,15 @@ public class DataProcessor {
     private final AtomicInteger count = new AtomicInteger(1);// Count for Task
     private final AtomicInteger activeCounter = new AtomicInteger(0);// Count for detecting Thread
     private final ExecutorService executor;
-    private final List<Future<Integer>> futures = new ArrayList<>();
-    private final List<CalculateSumTask> listOfTasks = new ArrayList<>();
-    private final Map<String, Integer> results = new LinkedHashMap<>();
+    private final List<Future<Integer>> futures;
+    private final List<CalculateSumTask> listOfTasks;
+    private final Map<String, Integer> results;
 
     public DataProcessor(int quantityOfThreads) {
         this.executor = Executors.newFixedThreadPool(quantityOfThreads);
+        futures = new ArrayList<>();
+        listOfTasks = new ArrayList<>();
+        results = new HashMap<>();
     }
 
     public void submitTask(int taskCount, int countNumbers) throws InterruptedException, ExecutionException {
